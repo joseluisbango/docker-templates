@@ -1,0 +1,67 @@
+version: '3'
+
+services:
+  liferay:
+    image: liferay/dxp:x.x
+
+    environment:      
+      LIFERAY_JPDA_ENABLED: "true" # enable remote debugging
+      #JPDA_ADDRESS: 0.0.0.0:8000 # needed for liferay/dxp:7.2.10.1 (and older) images (https://github.com/liferay/liferay-docker/issues/35)
+      LIFERAY_DISABLE_TRIAL_LICENSE: "true"
+      LIFERAY_JVM_OPTS: "-Xms2560m -Xmx4096m"
+      LIFERAY_SESSION_PERIOD_TIMEOUT_PERIOD_AUTO_PERIOD_EXTEND: "true"
+
+      LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_DRIVER_UPPERCASEC_LASS_UPPERCASEN_AME: org.postgresql.Driver
+      LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_URL: jdbc:postgresql://${MACHINE_HOST_IP}:5432/template-to-be-changed
+      LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_USERNAME: liferay
+      LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_PASSWORD: xz0ZHD5UeE
+
+    ports:
+      - 8000:8000 # Expose port for debugging
+      - 80[VERSION]:8080
+      - 113[VERSION]:11311 
+      - 92[VERSION]:920X # Elassticsearch, 7.0-7.2 -> 9200, 7.3+ -> 9201 (https://learn.liferay.com/w/dxp/using-search/installing-and-upgrading-a-search-engine/elasticsearch/using-the-sidecar-or-embedded-elasticsearch)
+
+    volumes:
+      - ./liferay:/mnt/liferay
+      - ./scripts:/usr/local/liferay/scripts
+      - ./data:/opt/liferay/data
+
+  # mail:
+  #   image: munkyboy/fakesmtp:latest
+  #   privileged: true
+  #   container_name: mail
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 1G
+  #       reservations:
+  #         memory: 1G
+  #   hostname: mail
+  #   ports:
+  #     - "25:25"
+  #   volumes: 
+  #     - ./fakesmtp:/var/mail
+  # mail-web:
+  #   image: mjstewart/fakesmtp-web:1.3
+  #   container_name: mail-web
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 1G
+  #       reservations:
+  #         memory: 1G
+  #   ports: 
+  #     - "60500:8080"
+  #   volumes:
+  #     - ./fakesmtp:/var/mail
+  #   environment:
+  #     - EMAIL_INPUT_DIR_POLL_RATE_SECONDS=30
+  #   depends_on:
+  #     - mail
+  
+#networks:
+#  lr-network:
+#    driver: bridge
+
+    
