@@ -15,8 +15,10 @@ It can be initialized like that in `~/.bashrc`:
 
     export MACHINE_HOST_IP=$(hostname -I | awk '{print $1}')
 
-### Important note regarding empty dirs
-Empty dirs have been added using this workaround: https://stackoverflow.com/a/932982. The following `.gitignonre` file has been added to those directories.
+---
+
+#### Important note regarding empty dirs
+Empty dirs have been added to the templates using this workaround: https://stackoverflow.com/a/932982. The following `.gitignonre` file has been added to those directories.
 
     # Ignore everything in this directory
     *
