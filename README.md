@@ -14,3 +14,13 @@ A env variable needs to be defined for connecting with your local database syste
 It can be initialized like that in `~/.bashrc`:
 
     export MACHINE_HOST_IP=$(hostname -I | awk '{print $1}')
+
+### Important note regarding empty dirs
+Empty dirs have been added using this workaround: https://stackoverflow.com/a/932982. The following `.gitignonre` file has been added to those directories.
+
+    # Ignore everything in this directory
+    *
+    # Except this file
+    !.gitignore
+
+Note that, if you plan to add files to any of those dirs, you may want to remove that `.gitignore` file.
