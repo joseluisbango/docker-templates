@@ -7,6 +7,8 @@ Docker templates to quicky setup different environments
 * 00-template: Base template
 * 01-template-staging: Base template for staging setup
 * 202x.qx.x: Quarterly Releases
+* 7310-template: 7.3 template
+* 7413-template: 7.4 template
 
 ### DB Connection
 A env variable needs to be defined for connecting with your local database system: `MACHINE_HOST_IP`. It is used in `componse.yml` files. 
